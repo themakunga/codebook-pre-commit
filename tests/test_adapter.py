@@ -91,3 +91,20 @@ class AdapterTests(unittest.TestCase):
              patch.object(adapter.sys, "stderr", io.StringIO()) as errors:
             self.assertEqual(adapter.main(), 2)
             self.assertIn("offline", errors.getvalue())
+
+    def test_allow_failure_only_ignores_spelling_errors(self):
+        for status in (0, 1, 2):
+            with self.subTest(status=status), \
+                 patch.object(adapter, "binary", return_value=Path("/binary")), \
+                 patch.object(adapter.sys, "argv", ["adapter", "--allow-failure", "--suggest", "a file.md"]), \
+                 patch.object(adapter.sys, "stderr", io.StringIO()) as errors, \
+                 patch.object(adapter.subprocess, "call", return_value=status) as run:
+                self.assertEqual(adapter.main(), 0 if status == 1 else status)
+                run.assert_called_once_with(["/binary", "lint", "--suggest", "a file.md"])
+                self.assertEqual("advisory" in errors.getvalue(), status == 1)
+
+    def test_allow_failure_keeps_download_errors_blocking(self):
+        with patch.object(adapter, "binary", side_effect=OSError("offline")), \
+             patch.object(adapter.sys, "argv", ["adapter", "--allow-failure", "file.md"]), \
+             patch.object(adapter.sys, "stderr", io.StringIO()):
+            self.assertEqual(adapter.main(), 2)

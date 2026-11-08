@@ -1,5 +1,6 @@
 """Run a verified official Codebook binary from the pre-commit environment."""
 
+import argparse
 import hashlib
 import io
 from pathlib import Path
@@ -69,8 +70,15 @@ def binary():
 
 
 def main():
+    parser = argparse.ArgumentParser(add_help=False, allow_abbrev=False)
+    parser.add_argument("--allow-failure", action="store_true")
+    options, args = parser.parse_known_args()
     try:
-        return subprocess.call([str(binary()), "lint", *sys.argv[1:]])
+        status = subprocess.call([str(binary()), "lint", *args])
+        if options.allow_failure and status == 1:
+            print("codebook-pre-commit: spelling errors are advisory; continuing.", file=sys.stderr)
+            return 0
+        return status
     except (OSError, RuntimeError, ValueError, KeyError, tarfile.TarError, zipfile.BadZipFile) as error:
         print(f"codebook-pre-commit: {error}", file=sys.stderr)
         return 2

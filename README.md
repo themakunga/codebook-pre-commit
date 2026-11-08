@@ -6,7 +6,7 @@ global installation or a Rust compiler. Python 3.10 or newer is required.
 ```yaml
 repos:
   - repo: https://github.com/themakunga/codebook-pre-commit
-    rev: v0.3.42
+    rev: v0.3.42.post1
     hooks:
       - id: codebook
         args: [--suggest]
@@ -21,6 +21,10 @@ dependencies are needed.
 Codebook reads `codebook.toml` or `.codebook.toml` from your project and preserves
 its lint exit status. The first run also needs network access for Codebook's
 dictionaries. Updates require a new adapter revision with updated checksums.
+
+To report spelling errors without blocking commits, set
+`args: [--allow-failure, --suggest]` and `verbose: true`. Download, integrity and
+execution errors still fail the hook. The default remains strict.
 
 The executable comes from upstream releases and remains subject to Codebook's
 license. This repository is an independent adapter.
