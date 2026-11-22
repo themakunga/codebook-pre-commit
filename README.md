@@ -30,3 +30,15 @@ The executable comes from upstream releases and remains subject to Codebook's
 license. This repository is an independent adapter.
 
 Run the adapter tests with `python -m unittest discover -s tests`.
+
+## Repository reference
+
+| Path                                               | Purpose                     |
+| -------------------------------------------------- | --------------------------- |
+| [`codebook_pre_commit.py`](codebook_pre_commit.py) | Project reference           |
+| [`pyproject.toml`](pyproject.toml)                 | Python project metadata     |
+| [`tests/`](tests/)                                 | Tests and regression checks |
+| [`.pre-commit-hooks.yaml`](.pre-commit-hooks.yaml) | Project configuration       |
+
+The default branch is `main`. Use the tracked manifests and scripts above
+when preparing changes; keep local credentials and generated files out of commits.
