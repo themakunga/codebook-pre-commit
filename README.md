@@ -1,5 +1,8 @@
 # Codebook for pre-commit
 
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![pre-commit](https://img.shields.io/badge/pre--commit-FAB040?style=flat-square&logo=precommit&logoColor=white)
+
 Run the official [Codebook](https://github.com/blopker/codebook) executable without a
 global installation or a Rust compiler. Python 3.10 or newer is required.
 
