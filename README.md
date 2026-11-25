@@ -1,5 +1,8 @@
 # Codebook for pre-commit
 
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![pre-commit](https://img.shields.io/badge/pre--commit-FAB040?style=flat-square&logo=precommit&logoColor=white)
+
 Run the official [Codebook](https://github.com/blopker/codebook) executable without a
 global installation or a Rust compiler. Python 3.10 or newer is required.
 
@@ -30,3 +33,15 @@ The executable comes from upstream releases and remains subject to Codebook's
 license. This repository is an independent adapter.
 
 Run the adapter tests with `python -m unittest discover -s tests`.
+
+## Repository reference
+
+| Path                                               | Purpose                     |
+| -------------------------------------------------- | --------------------------- |
+| [`codebook_pre_commit.py`](codebook_pre_commit.py) | Project reference           |
+| [`pyproject.toml`](pyproject.toml)                 | Python project metadata     |
+| [`tests/`](tests/)                                 | Tests and regression checks |
+| [`.pre-commit-hooks.yaml`](.pre-commit-hooks.yaml) | Project configuration       |
+
+The default branch is `main`. Use the tracked manifests and scripts above
+when preparing changes; keep local credentials and generated files out of commits.
